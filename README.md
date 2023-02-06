@@ -1,43 +1,70 @@
-# In name of Allah
+# Getting Started with Create React App
 
-## Introduction
-We want a simple app to browse different ads. This app consists of two main parts:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-1. Dashboard: Dashboard is a simple page with two main modes, the first is a list of banners & the second is a list of videos. Both lists are a grid of items (each item is a photo and title, the size of photo should be 300 * 300). **Note** that this page should be connected to API and retrieve items from API (you can use [picsum](https://picsum.photos/) for random photos, as for titles use the author name of picture). Also note the list is infinite, but only 60 items will be shown at first, with scroll of user new items (60 ones) must be got from API. 
-When clicked on each item, the user will be navigated to Video/Banner page.
+## Available Scripts
 
-**Note** that this list should be responsive.
+In the project directory, you can run:
 
-![image](https://camo.githubusercontent.com/ac8f7bbd3b41624b27be5a523b23a000081ba2e9c92c29119e5a6ab19dcd260a/68747470733a2f2f7075752e73682f4777504c452f336265353830313536612e706e67 "You could use this UI as sample")
-<p align="center">
-You could use this UI as sample 
-</p>
+### `npm start`
 
-2. Video/Banner page: This page shows a video or a banner based on what mode the dashboard item was. the video or banner will be retrieved from API (like [this](http://www.clipstill.com/wp-content/uploads/000055_swan_thumb.mp4?_=1)). Also a counter must shown below video/banner, which indicates how many times user has clicked on video/banner (this means you should track clicks on video/banner).
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### Note
-Use redux for state management.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-## Expectations
+### `npm test`
 
-So What does matter to us?
-- a clean structure of codebase & components
-- clean code practices
-- ability to layout page correctly
-- responsive design
-- well designed API calls
-- profound understanding of states
-- finally, ability to learn
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## Tasks
+### `npm run build`
 
-1. Fork this repository
-2. Estimate the develop & send it to us
-3. Break and specify your tasks in project management tool (append the image of your tasks to readme file of your project)
-4. Learn & Develop
-5. Push your code to your repository
-6. Explain the roadmap of your development in readme of repository (also append the image of your specified tasks on part 3 to file)
-6. Send us a pull request, we will review and get back to you
-7. Enjoy
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-**Finally** don't be afraid to ask anything from us.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
