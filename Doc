@@ -1,0 +1,55 @@
+Local Storage
+In this application, local storage is used to store the list of items when the device is offline. The following APIs are used to store the data locally:
+
+javascript
+
+localStorage.setItem("items", JSON.stringify(items));
+where items is the array of items that the user has added to the list.
+
+Server Storage
+In this application, server storage is used to store the list of items on a server and make it available to other users or devices. The following API is used to send the data to the server:
+
+javascript
+
+```sh
+
+axios.post("https://your-server.com/items", { items });
+where items is the array of items that the user has added to the list.
+```
+
+Synchronization
+The application periodically checks the server for updates to the list of items. If there are any updates, the local copy of the data is updated with the latest version from the server. The following API is used to retrieve the latest version of the data from the server:
+
+javascript
+
+```sh
+axios.get("https://your-server.com/items").then(({ data }) => {
+localStorage.setItem("items", JSON.stringify(data.items));
+});
+```
+
+Offline Scenario
+When the device is offline, the application continues to store new items in the local storage. When the device is back online, the data is sent to the server. The following code is used to send the data to the server:
+
+javascript
+
+```sh
+axios.post("https://your-server.com/items", { items }).catch(() => {
+// store data in queue for later synchronization
+});
+```
+
+Error Handling
+The application handles errors gracefully, such as if the server is temporarily unavailable or if there is a problem with the network connection. The following code is used to handle these scenarios:
+
+javascript
+
+```sh
+try {
+axios.post("https://your-server.com/items", { items });
+} catch (error) {
+console.error(error);
+}
+```
+
+This is just an example of how you can document the use of local storage and server storage in your application. You can customize the documentation to fit the specific needs and requirements of your project.
