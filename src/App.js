@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import Root from "./routes/root";
 import './App.css';
 import {
@@ -15,7 +14,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "app/discover",
+        path: "discover",
         element: <Discover />,
       },
       {

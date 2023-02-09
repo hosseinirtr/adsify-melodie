@@ -4,6 +4,19 @@ import logo from "../../assets/logo.png";
 import { links } from "../../routes/links";
 
 export default function Sidebar() {
+  const checkMenueActive = (root, urlName) => {
+    const menuUrl = root + urlName;
+    var path = window.location.pathname;
+    console.log("current path:", path === menuUrl, "\n");
+    path = path.replace(/\/$/, "");
+    path = decodeURIComponent(path);
+    // console.log("path", urlName === path);
+    if (root + urlName === path) {
+      return "active";
+    }
+  };
+  checkMenueActive();
+
   return (
     <div id="sidebar">
       <div>
@@ -13,7 +26,15 @@ export default function Sidebar() {
         <ul>
           {links.map((items, index) => (
             <li key={index}>
-              <Link to={items.to}>{items.name}</Link>
+              <Link
+                className={`sidebar-item ${checkMenueActive(
+                  "/app/",
+                  items.to
+                )}`}
+                to={items.to}
+              >
+                {items.name}
+              </Link>
             </li>
           ))}
         </ul>

@@ -1,11 +1,11 @@
 export const links = [{
-    to: "app/discover", name: "Discover"
+    to: "discover", name: "Discover"
 }, {
-    to: "app/songs", name: "Songs"
+    to: "songs", name: "Songs"
 }, {
-    to: "app/albums", name: "Albums"
+    to: "albums", name: "Albums"
 }, {
-    to: "app/artists", name: "Artists"
+    to: "artists", name: "Artists"
 }, {
-    to: "app/youtube", name: "YouTube"
+    to: "youtube", name: "YouTube"
 },]
