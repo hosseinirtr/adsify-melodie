@@ -14,20 +14,20 @@ export default function Header() {
             Search anything in your mind
           </span>
         </div>
-        <div>
-          <img src={tvIcon} alt="search-icon" />{" "}
-          <span style={{ marginInline: "10px" }}>2 TV</span>
+        <div className="header-section">
+          <img src={tvIcon} alt="tv" />{" "}
+          <span style={{ marginInline: "0px" }}></span>
         </div>
-        <div>
-          <img src={radioIcon} alt="search-icon" />{" "}
-          <span style={{ marginInline: "10px" }}>3 Radio</span>
+        <div className="header-section">
+          <img src={radioIcon} alt="radio" />{" "}
+          <span style={{ marginInline: "0px" }}></span>
         </div>
-        <div>
-          <img src={bellIcon} alt="search-icon" />{" "}
-          <span style={{ marginInline: "10px" }}>4 Notification</span>
+        <div className="header-section">
+          <img src={bellIcon} alt="notification" />{" "}
+          <span style={{ marginInline: "0px" }}></span>
         </div>
-        <div>
-          <span style={{ marginInline: "10px" }}>5 Profile</span>
+        <div id="header-profile">
+          <span style={{ marginInline: "0px" }}>Profile</span>
         </div>
       </div>
     </>
