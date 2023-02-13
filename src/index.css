@@ -13,14 +13,13 @@ html {
 }
 
 :root {
-  --blue: #4CE5FC;
+  --blue: #4ce5fc;
   --liteblue: #82eeffaf;
   --gray: #46494e70;
   --gray1: #46494edc;
-  --darkblue: #0F1E36;
-  background: #F2F2F2;
+  --darkblue: #0f1e36;
+  background: #f2f2f2;
   /* background: linear-gradient(180deg, rgba(244, 249, 255, 0.0001) 0%, #F4F9FF 26.23%); */
-
 }
 
 body {
@@ -127,10 +126,13 @@ form[action$="destroy"] button {
 #sidebar {
   width: 16rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background: #FFFFFF;
+  background: #ffffff;
   border-top-right-radius: 15px;
-  display: flex;
-  flex-direction: column;
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  transition: 0.5s;
+  overflow: hidden;
 }
 
 #sidebar>* {
@@ -236,12 +238,12 @@ i {
 #sidebar li {
   padding: 5px 0;
   margin: 0.25rem 0;
-  font-family: 'Source Sans Pro';
+  font-family: "Source Sans Pro";
   font-style: italic;
   font-weight: 300;
   font-size: 18px;
-  line-height: 32px;
-  color: var(--gray1)
+  line-height: 24px;
+  color: var(--gray1);
 }
 
 #sidebar nav a,
@@ -268,7 +270,7 @@ i {
 
 #sidebar nav a:hover {
   background: var(--liteblue);
-  color: var(--darkblue)
+  color: var(--darkblue);
 }
 
 #sidebar nav a.active {
@@ -279,13 +281,17 @@ i {
   color: hsl(224, 98%, 58%);
 }
 
-#detail {
-  flex: 1;
-  padding: 2rem 4rem;
-  width: 100%;
+#main {
+  position: absolute;
+  width: calc(100% - 200px);
+  left: 200px;
+  min-height: 100vh;
+  background: var(--white);
+  transparent: 0.5s;
+  padding: 2rem 1rem;
 }
 
-#detail.loading {
+#main.loading {
   opacity: 0.25;
   transition: opacity 200ms;
   transition-delay: 200ms;
@@ -428,7 +434,6 @@ i {
   width: 100%;
 }
 
-
 .sidebar-logo {}
 
 .header {
@@ -440,23 +445,20 @@ i {
 
 .header div {
   width: 100%;
-  padding-inline: 25px;
-  border-right: 1px solid var(--gray);
-}
-
-.header div {
-  width: 100%;
   text-align: center;
   padding-inline: 25px;
   border-right: 1px solid var(--gray);
 }
 
-
 .header div:first-child {
-  width: 100%;
+  width: 2500px;
   text-align: left;
   padding-inline: 0;
   border-right: 1px solid var(--gray);
+}
+
+.header-section {
+  width: 150px !important;
 }
 
 .header div:last-child {
@@ -464,4 +466,15 @@ i {
   text-align: center;
   padding-inline: 25px;
   border-right: 0px solid var(--gray);
+}
+
+.song-list {
+  margin: 0.25rem 0;
+  font-family: "Source Sans Pro";
+  font-style: italic;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--gray1);
+  list-style-type: ">";
 }

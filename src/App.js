@@ -1,11 +1,8 @@
 import Root from "./routes/root";
-import './App.css';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import ErrorPage from './error-page';
-import Discover from './routes/pages/discover';
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./error-page";
+import Discover from "./routes/pages/discover";
 
 const router = createBrowserRouter([
   {
