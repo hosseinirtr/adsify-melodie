@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
   box-sizing: border-box;
 }
@@ -232,6 +236,7 @@ i {
 }
 
 #sidebar li {
+  padding: 5px 0;
   margin: 0.25rem 0;
   font-family: "Source Sans Pro";
   font-style: italic;
@@ -241,7 +246,8 @@ i {
   color: var(--gray1);
 }
 
-#sidebar nav a {
+#sidebar nav a,
+.sidebar-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -254,9 +260,11 @@ i {
   gap: 1rem;
 }
 
-#sidebar nav li:active {
+.active {
   color: var(--blue);
-  background: #e6e3e370;
+  font-weight: 900;
+  font-size: 18px;
+  background: var(--darkblue);
   border-radius: 10px;
 }
 
@@ -454,9 +462,11 @@ i {
   padding-inline: 0;
   border-right: 1px solid var(--gray);
 }
+
 .header-section {
   width: 150px !important;
 }
+
 .header div:last-child {
   width: 100%;
   text-align: center;
