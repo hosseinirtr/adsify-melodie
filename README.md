@@ -1,8 +1,8 @@
-# 🎧 Groove On the Go 🚀
+# 🎧 Adsify 🚀
 
 Bring your music with you, anywhere you go! 🌍
 
-With Groove On the Go, you can now jam out to your favorite tunes no matter where you are, just with a browser. 💻
+With Adsify, you can now jam out to your favorite tunes no matter where you are, just with a browser. 💻
 
 ## Features
 

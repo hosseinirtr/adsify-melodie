@@ -430,6 +430,11 @@ i {
 }
 
 .header {
+  position: absolute;
+  left: 300px;
+  top: 0;
+  background: #fff;
+  width: %90;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -460,6 +465,7 @@ i {
 }
 
 .song-list {
+  width: 500px;
   margin: 0.25rem 0;
   font-family: "Source Sans Pro";
   font-style: italic;
@@ -467,5 +473,95 @@ i {
   font-size: 18px;
   line-height: 24px;
   color: var(--gray1);
-  list-style-type: ">";
+}
+
+.banner {
+  background: url("./assets/banner.png") no-repeat;
+  background-size: 100%;
+  float: left;
+  height: 25vw;
+  width: 100%;
+}
+
+.banner > .quote {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  position: absolute;
+  top: 160px;
+  left: 50px;
+  width: 350px;
+  background: #000;
+  text-transform: capitalize;
+
+  color: #ffffff;
+}
+
+.banner > .quote-user {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  position: absolute;
+  top: 230px;
+  left: 50px;
+  width: 300px;
+  text-transform: capitalize;
+  background: #000;
+  color: #ffffff;
+}
+
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  outline: none;
+  position: absolute;
+}
+
+.file-input label {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  background: linear-gradient(40deg, var(--blue), var(--liteblue));
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+  outline: none;
+}
+
+.file-name {
+  position: absolute;
+  bottom: -35px;
+  left: 10px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+input:hover + label,
+input:focus + label {
+  transform: scale(1.02);
+}
+
+/* Adding an outline to the label on focus */
+input:focus + label {
+  outline: 1px solid #000;
+  outline: -webkit-focus-ring-color auto 2px;
+}
+.song-item {
+  text-align: left;
+  background: transparent;
+  width: 600px;
+  box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.2), 0 1px 2px hsla(0, 0%, 0%, 0.2);
 }

@@ -6,15 +6,15 @@ const Discover = () => {
   const [videoFiles, setVideoFiles] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
+  const musicExtensions = [".mp3", ".flac", ".m4a"];
+  const videoExtensions = [".mp4", ".mkv", ".avi"];
+  const [currentPlayName, setCurrentPlayName] = useState();
 
   const handleFileSelect = (event) => {
     const newFiles = Array.from(event.target.files);
     console.log("newFiles", newFiles);
 
     setFiles([...files, ...newFiles]);
-
-    const musicExtensions = [".mp3", ".flac", ".m4a"];
-    const videoExtensions = [".mp4", ".mkv", ".avi"];
 
     setMusicFiles([
       ...musicFiles,
@@ -48,6 +48,7 @@ const Discover = () => {
   };
 
   const handleChoose = (file) => {
+    setCurrentPlayName(fixName(file?.name));
     handlePause();
     audioRef.current.src = URL.createObjectURL(file);
     handlePlay();
@@ -70,24 +71,46 @@ const Discover = () => {
     }
   }, [musicFiles]);
 
+  const fixName = (name) => {
+    return name
+      .replace(
+        new RegExp([...musicExtensions, "320", "(1)", "(", ")"].join("|"), "g"),
+        ""
+      )
+      .replace(/[-_]/g, " ");
+  };
   return (
     <>
-      <div>
-        <input
-          type="file"
-          id="folderInput"
-          webkitdirectory="true"
-          directory="true"
-          multiple={true}
-          onChange={handleFileSelect}
-        />
+      <div className="banner">
+        <div>{`//`} TRENDING</div>
+        <div className="quote">
+          I can’t fall back, I came too far. Hold myself up, and love my scars.
+        </div>
+        <div className="quote-user"> - Linkin Park</div>
+      </div>
+      <div className="user-song">
+        <br />
+        <div className="file-input">
+          <input
+            type="file"
+            webkitdirectory="true"
+            directory="true"
+            multiple={true}
+            onChange={handleFileSelect}
+            className="file custom-file-input"
+            id="file"
+          />
+          <label for="file">
+            Select file
+            <p className="file-name"></p>
+          </label>
+        </div>
         <h2>Music Files:</h2>
         <ul>
           {musicFiles.map((file) => (
             <li className="song-list" key={file.name}>
-              {" "}
-              <button onClick={() => handleChoose(file)} className="">
-                {file.name}
+              <button onClick={() => handleChoose(file)} className="song-item">
+                {fixName(file.name)}
               </button>
             </li>
           ))}
@@ -102,7 +125,7 @@ const Discover = () => {
       {musicFiles.length > 0 && <audio ref={audioRef} />}
       {musicFiles.length > 0 && (
         <div>
-          <p>Now playing: {musicFiles[0].name}</p>
+          <p>Now playing: {currentPlayName}</p>
           <button onClick={isPlaying ? handlePause : handlePlay}>
             {isPlaying ? "Pause" : "Play"}
           </button>
