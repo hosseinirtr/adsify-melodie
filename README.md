@@ -36,3 +36,14 @@ npm start
 ```sh
 Enjoying life brings happiness and fulfillment.
 ```
+
+## Sponsorships
+
+Your support is greatly appreciated! You can support this project on the following platforms:
+
+- GitHub Sponsors
+- Patreon
+- PayPal
+- Ko-fi
+
+By becoming a sponsor, you'll help fund the development and maintenance of this project. Thank you for your support!

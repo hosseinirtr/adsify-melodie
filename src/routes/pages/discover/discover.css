@@ -1,0 +1,134 @@
+.song-list:nth-child(odd) {
+  /* background: var(--gray); */
+}
+.song-item-btn {
+  width: 70vw;
+  min-height: 30px;
+  border-bottom: 1px solid var(--gray);
+  text-align: left;
+  background: transparent;
+  box-shadow: none;
+}
+.song-list {
+  border-left: 30px solid transparent;
+  width: 500px;
+  margin: 0.25rem 0;
+  font-family: "Source Sans Pro";
+  font-style: italic;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--gray1);
+}
+.song-list > button {
+  border: none;
+}
+
+.song-list:checked {
+  background: red;
+}
+
+.banner {
+  background: url("../../../assets/banner.png") no-repeat;
+  background-size: 100%;
+  float: left;
+  height: 25vw;
+  width: 100%;
+}
+
+.onplay {
+  margin-left: 29px;
+  background: #fff;
+  border: 1px solid var(--liteblue);
+  border-radius: 10px;
+  width: 86%;
+}
+.onplay > button {
+  border: none;
+}
+.onplay > button:hover {
+  border: none;
+  border-color: var(--liteblue);
+}
+.banner > .banner-badge {
+  /* position: absolute; */
+  left: 50px;
+  opacity: 0.5;
+  font-size: 12px;
+  background: #fff;
+}
+.banner > .quote {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  position: absolute;
+  top: 10vh;
+  left: 50px;
+  width: 350px;
+  background: #000;
+  text-transform: capitalize;
+
+  color: #ffffff;
+}
+
+.banner > .quote-user {
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  position: absolute;
+  top: 20vh;
+  left: 50px;
+  text-transform: capitalize;
+  background: #000;
+  color: #ffffff;
+}
+
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  outline: none;
+  position: absolute;
+}
+
+.file-input label {
+  display: block;
+  position: relative;
+  width: 88px;
+  height: 30px;
+  border-radius: 25px;
+  background: linear-gradient(40deg, var(--blue), var(--liteblue));
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+  outline: none;
+}
+
+.file-name {
+  position: absolute;
+  bottom: -35px;
+  left: 10px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+input:hover + label,
+input:focus + label {
+  transform: scale(1.02);
+}
+
+/* Adding an outline to the label on focus */
+input:focus + label {
+  outline: 1px solid #000;
+  outline: -webkit-focus-ring-color auto 2px;
+}

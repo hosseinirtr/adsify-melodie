@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { links } from "../../routes/links";
-
+import "./sidebar.css";
 export default function Sidebar() {
   const checkMenueActive = (root, urlName) => {
     const menuUrl = root + urlName;
