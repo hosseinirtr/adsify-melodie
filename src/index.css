@@ -4,6 +4,7 @@
 
 html {
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 *,
@@ -135,7 +136,7 @@ form[action$="destroy"] button {
   overflow: hidden;
 }
 
-#sidebar > * {
+#sidebar>* {
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -159,7 +160,7 @@ form[action$="destroy"] button {
   top: 1px;
 }
 
-#sidebar > div {
+#sidebar>div {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -168,11 +169,11 @@ form[action$="destroy"] button {
   /* border-bottom: 1px solid #e3e3e3; */
 }
 
-#sidebar > div form {
+#sidebar>div form {
   position: relative;
 }
 
-#sidebar > div form input[type="search"] {
+#sidebar>div form input[type="search"] {
   width: 100%;
   padding-left: 2rem;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='%23999' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' /%3E%3C/svg%3E");
@@ -182,7 +183,7 @@ form[action$="destroy"] button {
   position: relative;
 }
 
-#sidebar > div form input[type="search"].loading {
+#sidebar>div form input[type="search"].loading {
   background-image: none;
 }
 
@@ -287,8 +288,8 @@ i {
   left: 200px;
   min-height: 100vh;
   background: var(--white);
-  transparent: 0.5s;
-  padding: 2rem 1rem;
+  /* transparent: 0.5s; */
+  padding: 2.7rem 1rem;
 }
 
 #main.loading {
@@ -309,11 +310,11 @@ i {
   line-height: 1.2;
 }
 
-#contact h1 + p {
+#contact h1+p {
   margin: 0;
 }
 
-#contact h1 + p + p {
+#contact h1+p+p {
   white-space: break-spaces;
 }
 
@@ -342,7 +343,7 @@ i {
   object-fit: cover;
 }
 
-#contact h1 ~ div {
+#contact h1~div {
   display: flex;
   gap: 0.5rem;
   margin: 1rem 0;
@@ -355,16 +356,16 @@ i {
   gap: 1rem;
 }
 
-#contact-form > p:first-child {
+#contact-form>p:first-child {
   margin: 0;
   padding: 0;
 }
 
-#contact-form > p:first-child > :nth-child(2) {
+#contact-form>p:first-child> :nth-child(2) {
   margin-right: 1rem;
 }
 
-#contact-form > p:first-child,
+#contact-form>p:first-child,
 #contact-form label {
   display: flex;
 }
@@ -434,19 +435,18 @@ i {
   width: 100%;
 }
 
-.sidebar-logo {
-}
+.sidebar-logo {}
 
 .header {
-  position: absolute;
-  left: 300px;
+  position: fixed;
+  left: 250px;
   top: 0;
-  background: #fff;
-  width: %90;
+  right: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 10px;
+
 }
 
 .header div {
@@ -457,7 +457,7 @@ i {
 }
 
 .header div:first-child {
-  width: 2500px;
+  width: 600px;
   text-align: left;
   padding-inline: 0;
   border-right: 1px solid var(--gray);
@@ -493,7 +493,7 @@ i {
   width: 100%;
 }
 
-.banner > .quote {
+.banner>.quote {
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 700;
@@ -509,7 +509,7 @@ i {
   color: #ffffff;
 }
 
-.banner > .quote-user {
+.banner>.quote-user {
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 700;
@@ -559,16 +559,17 @@ i {
   color: #555;
 }
 
-input:hover + label,
-input:focus + label {
+input:hover+label,
+input:focus+label {
   transform: scale(1.02);
 }
 
 /* Adding an outline to the label on focus */
-input:focus + label {
+input:focus+label {
   outline: 1px solid #000;
   outline: -webkit-focus-ring-color auto 2px;
 }
+
 .song-item {
   text-align: left;
   background: transparent;
