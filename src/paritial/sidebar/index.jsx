@@ -1,9 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { links } from "../../routes/links";
-
+import "./sidebar.css";
 export default function Sidebar() {
+  const location = useLocation();
   const checkMenueActive = (root, urlName) => {
     const menuUrl = root + urlName;
     var path = window.location.pathname;
@@ -15,7 +16,9 @@ export default function Sidebar() {
       return "active";
     }
   };
-  checkMenueActive();
+  useEffect(() => {
+    checkMenueActive();
+  }, [location]);
 
   return (
     <div id="sidebar">

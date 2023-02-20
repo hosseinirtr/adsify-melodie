@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import "./discover.css";
+import onplay from "../../../assets/icons/onplay.png";
 
 const Discover = () => {
   const [files, setFiles] = useState([]);
@@ -53,9 +55,7 @@ const Discover = () => {
     audioRef.current.src = URL.createObjectURL(file);
     handlePlay();
   };
-  if (audioRef?.current?.src) {
-    console.log(audioRef, audioRef?.current?.src);
-  }
+
   const handlePause = () => {
     audioRef.current.pause();
     setIsPlaying(false);
@@ -74,15 +74,19 @@ const Discover = () => {
   const fixName = (name) => {
     return name
       .replace(
-        new RegExp([...musicExtensions, "320", "(1)", "(", ")"].join("|"), "g"),
+        new RegExp(
+          [...musicExtensions, "320", "(1)", "(", ")", "()"].join("|"),
+          "g"
+        ),
         ""
       )
       .replace(/[-_]/g, " ");
   };
+
   return (
     <>
       <div className="banner">
-        <div>{`//`} TRENDING</div>
+        <div className="banner-badge">{`//`} TRENDING</div>
         <div className="quote">
           I can’t fall back, I came too far. Hold myself up, and love my scars.
         </div>
@@ -105,27 +109,47 @@ const Discover = () => {
             <p className="file-name"></p>
           </label>
         </div>
-        <h2>Music Files:</h2>
+        <br />
+        {musicFiles.length > 0 && <h2>Music Files:</h2>}
         <ul>
-          {musicFiles.map((file) => (
-            <li className="song-list" key={file.name}>
-              <button onClick={() => handleChoose(file)} className="song-item">
+          {musicFiles.map((file, index) => (
+            <li
+              className={`song-list ${
+                currentPlayName === fixName(file.name) ? "onplay" : ""
+              }`}
+              key={file.name}
+            >
+              <button
+                onClick={() => handleChoose(file)}
+                className="song-item-btn flex items-center"
+              >
+                {currentPlayName === fixName(file.name) && (
+                  <img src={onplay} alt="onplay" className="ml-2 mr-2" />
+                )}
+                <span
+                  className={`${
+                    currentPlayName === fixName(file.name) ? "" : "ml-8"
+                  }`}
+                >
+                  {index + 1} -{" "}
+                </span>
                 {fixName(file.name)}
               </button>
             </li>
           ))}
         </ul>
-        <h2>Video Files:</h2>
+        {videoFiles.length > 0 && <h2>Video Files:</h2>}
         <ul>
           {videoFiles.map((file) => (
             <li key={file.name}>{file.name}</li>
           ))}
         </ul>
       </div>
+      <br />
       {musicFiles.length > 0 && <audio ref={audioRef} />}
       {musicFiles.length > 0 && (
         <div>
-          <p>Now playing: {currentPlayName}</p>
+          {currentPlayName && <p>Now playing: {currentPlayName}</p>}
           <button onClick={isPlaying ? handlePause : handlePlay}>
             {isPlaying ? "Pause" : "Play"}
           </button>
