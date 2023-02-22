@@ -41,6 +41,8 @@ export default function Sidebar() {
             </li>
           ))}
         </ul>
+        <p className="font-bold ml-8 mt-9">Playlist</p>
+        <ul></ul>
       </nav>
     </div>
   );
