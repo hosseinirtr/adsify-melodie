@@ -74,7 +74,8 @@ button:active {
   box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.4);
   transform: translateY(1px);
 }
-= form[action$="destroy"] button {
+
+form[action$="destroy"] button {
   color: #f44250;
 }
 
@@ -122,8 +123,8 @@ button:active {
   left: 200px;
   min-height: 100vh;
   background: var(--white);
-  transparent: 0.5s;
-  padding: 2rem 1rem;
+  /* transparent: 0.5s; */
+  padding: 2.7rem 1rem;
 }
 
 #main.loading {
