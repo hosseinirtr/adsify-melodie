@@ -1,6 +1,7 @@
 .song-list:nth-child(odd) {
   /* background: var(--gray); */
 }
+
 .song-item-btn {
   width: 70vw;
   min-height: 30px;
@@ -9,6 +10,7 @@
   background: transparent;
   box-shadow: none;
 }
+
 .song-list {
   border-left: 30px solid transparent;
   width: 500px;
@@ -20,7 +22,8 @@
   line-height: 24px;
   color: var(--gray1);
 }
-.song-list > button {
+
+.song-list>button {
   border: none;
 }
 
@@ -29,6 +32,7 @@
 }
 
 .banner {
+  margin-top: 10px;
   background: url("../../../assets/banner.png") no-repeat;
   background-size: 100%;
   float: left;
@@ -43,21 +47,27 @@
   border-radius: 10px;
   width: 86%;
 }
-.onplay > button {
+
+.onplay>button {
   border: none;
 }
-.onplay > button:hover {
+
+.onplay>button:hover {
   border: none;
   border-color: var(--liteblue);
 }
-.banner > .banner-badge {
+
+.banner>.banner-badge {
   /* position: absolute; */
+  font-weight: bold;
+  color: #000;
   left: 50px;
-  opacity: 0.5;
+  opacity: 0.8;
   font-size: 12px;
   background: #fff;
 }
-.banner > .quote {
+
+.banner>.quote {
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 700;
@@ -73,7 +83,7 @@
   color: #ffffff;
 }
 
-.banner > .quote-user {
+.banner>.quote-user {
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 700;
@@ -122,13 +132,13 @@
   color: #555;
 }
 
-input:hover + label,
-input:focus + label {
+input:hover+label,
+input:focus+label {
   transform: scale(1.02);
 }
 
 /* Adding an outline to the label on focus */
-input:focus + label {
+input:focus+label {
   outline: 1px solid #000;
   outline: -webkit-focus-ring-color auto 2px;
 }
