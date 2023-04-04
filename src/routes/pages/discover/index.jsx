@@ -11,8 +11,10 @@ const Discover = () => {
   const musicExtensions = [".mp3", ".flac", ".m4a"];
   const videoExtensions = [".mp4", ".mkv", ".avi"];
   const [currentPlayName, setCurrentPlayName] = useState();
+  const [dragOver, setDragOver] = useState(false);
 
   const handleFileSelect = (event) => {
+    console.log("event", event);
     const newFiles = Array.from(event.target.files);
     console.log("newFiles", newFiles);
 
@@ -83,8 +85,20 @@ const Discover = () => {
       .replace(/[-_]/g, " ");
   };
 
+  const handleDrop = (event) => {
+    console.log("event", event);
+    event.preventDefault();
+    setDragOver(false);
+    handleFileSelect(event);
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+    setDragOver(true);
+  };
+
   return (
-    <>
+    <div onDragOver={(e) => handleDragOver(e)} onDrop={(e) => handleDrop(e)}>
       <div className="banner">
         <div className="banner-badge">{`//`} TRENDING</div>
         <div className="quote">
@@ -92,7 +106,12 @@ const Discover = () => {
         </div>
         <div className="quote-user"> - Linkin Park</div>
       </div>
-      <div className="user-song">
+      <div
+        className={`user-song ${dragOver ? "drag-over" : ""}`}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+      >
+        {" "}
         <br />
         <div className="file-input">
           <input
@@ -146,6 +165,16 @@ const Discover = () => {
         </ul>
       </div>
       <br />
+      {isPlaying && (
+        <div className="playing-song">
+          <audio src="" autoPlay={true} ref={audioRef} onEnded={handlePause} />
+          <div className="playing-song-details">
+            <div className="song-name">{currentPlayName}</div>
+            <div className="song-artist">Artist Name</div>
+          </div>
+        </div>
+      )}
+
       {musicFiles.length > 0 && <audio ref={audioRef} />}
       {musicFiles.length > 0 && (
         <div>
@@ -155,7 +184,7 @@ const Discover = () => {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -141,4 +141,5 @@ button:active {
 }
 
 .sidebar-logo {
+  border-left: 3vw solid transparent;
 }

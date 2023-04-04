@@ -47,9 +47,8 @@ i {
   white-space: pre;
   padding: 0.5rem;
   color: inherit;
-  border-left: 15px solid;
   text-decoration: none;
-  border-left: 25px solid transparent;
+  border-left: 2vw solid transparent;
   gap: 1rem;
 }
 

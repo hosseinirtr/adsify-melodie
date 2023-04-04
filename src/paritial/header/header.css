@@ -89,9 +89,13 @@
   text-align: left;
   padding-inline: 0;
   border-right: 1px solid var(--gray);
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
 }
 
 .header-section {
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
   width: 150px !important;
   display: grid;
   align-content: center;
