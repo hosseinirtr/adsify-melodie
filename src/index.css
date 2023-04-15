@@ -141,4 +141,6 @@ form[action$="destroy"] button {
   width: 100%;
 }
 
-.sidebar-logo {}
+.sidebar-logo {
+  border-left: 3vw solid transparent;
+}
