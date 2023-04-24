@@ -1,18 +1,17 @@
-const initialState = {
-  musicList: [],
-};
+import { combineReducers } from 'redux'
+import currentPlayReducer from './currentPlayReducer'
+import extensionsReducer from './extensionsReducer'
+import musicListReducer from './musicReducer'
+import videoListReducer from './videoReducer'
 
 
-const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'SET_MUSIC_LIST':
-      return {
-        ...state,
-        musicList: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+const rootReducer = combineReducers({
+  currentPlay: currentPlayReducer,
+  extensions: extensionsReducer,
+  musicList: musicListReducer,
+  videoList: videoListReducer
+})
+
+
 
 export default rootReducer;

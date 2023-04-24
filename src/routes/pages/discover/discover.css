@@ -3,7 +3,7 @@
 }
 
 .song-item-btn {
-  width: 70vw;
+  width: 100%;
   min-height: 30px;
   border-bottom: 1px solid var(--gray);
   text-align: left;
@@ -41,11 +41,10 @@
 }
 
 .onplay {
-  margin-left: 29px;
   background: #fff;
   border: 1px solid var(--liteblue);
   border-radius: 10px;
-  width: 86%;
+  width: 100%;
 }
 
 .onplay>button {

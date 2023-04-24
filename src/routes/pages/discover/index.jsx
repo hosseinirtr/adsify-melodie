@@ -3,16 +3,23 @@ import './discover.css';
 import onplay from '../../../assets/icons/onplay.png';
 import jsmediatags from 'jsmediatags-web';
 import { useDispatch } from 'react-redux';
-import { setMusicList } from '../../../actions/actions';
+import { setMusicList } from '../../../actions/musicActions';
+import { setCurrentPlay } from '../../../actions/currentPlayActions';
+import { handleImageError } from '../../../utils/files';
+import { useSelector, shallowEqual } from 'react-redux';
 
 const Discover = () => {
-  const [files, setFiles] = useState([]);
-  const [musicFiles, setMusicFiles] = useState([]);
-  const [videoFiles, setVideoFiles] = useState([]);
+  const musics = useSelector((data) => data.musicList, shallowEqual);
+  const video = useSelector((data) => data.videoList, shallowEqual);
+
+  const musicExtensions = useSelector(
+    (musicExtensions) => musicExtensions.extensions.musicExtensions,
+    shallowEqual,
+  );
+
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
-  const musicExtensions = ['.mp3', '.flac', '.m4a'];
-  const videoExtensions = ['.mp4', '.mkv', '.avi'];
+
   const [currentPlayName, setCurrentPlayName] = useState();
   const [dragOver, setDragOver] = useState(false);
   const [artistName, setArtistName] = useState();
@@ -21,27 +28,17 @@ const Discover = () => {
   const dispatch = useDispatch();
 
   const handleFileSelect = (event) => {
-    const newFiles = Array.from(event.target.files);
-    const newMusicFiles = newFiles.filter((file) => {
-      return (
-        !musicFiles.find((existingFile) => existingFile.name === file.name) &&
-        musicExtensions.includes(file.name.substr(-4).toLowerCase())
-      );
-    });
-
-    const updatedMusicList = [...musicFiles, ...newMusicFiles];
-
-    setFiles([...files, ...newFiles]);
-    setMusicFiles([...musicFiles, ...newMusicFiles]);
-
-    dispatch(setMusicList(updatedMusicList));
+    dispatch(setMusicList(event));
   };
 
   const handlePause = () => {
-    audioRef.current.pause();
+    audioRef?.current?.pause();
     setIsPlaying(false);
   };
-
+  const handlePlay = () => {
+    audioRef?.current?.play();
+    setIsPlaying(true);
+  };
   const handleChoose = (file) => {
     jsmediatags.read(file, {
       onSuccess: function (tag) {
@@ -56,6 +53,16 @@ const Discover = () => {
         setCurrentPlayName(tag.tags.title);
         setArtistName(tag.tags.artist);
         setAudioPicture(imageUrl);
+        console.log(tag.tags);
+        console.log(tag);
+        dispatch(
+          setCurrentPlay({
+            file,
+            currentPlayName,
+            artistName,
+            audioPicture,
+          }),
+        );
       },
       onError: function (error) {
         console.log(':(', error.type, error.info);
@@ -66,23 +73,17 @@ const Discover = () => {
     handlePlay();
   };
 
-  const handlePlay = () => {
-    audioRef.current.play();
-    setIsPlaying(true);
-  };
-
   useEffect(() => {
-    if (musicFiles.length > 0 && !audioRef) {
-      audioRef.current.src = URL.createObjectURL(musicFiles[0]);
+    if (musics?.length > 0 && !audioRef) {
+      audioRef.current.src = URL.createObjectURL(musics[0]);
     }
-    dispatch(setMusicList(musicFiles));
-  }, [musicFiles]);
+  }, [musics]);
 
   const fixName = (name) => {
     return name
       .replace(
         new RegExp(
-          [...musicExtensions, '320', '(1)', '(', ')', '()'].join('|'),
+          [...musicExtensions, '320', '(1)', '( 1 )', '(', ')', '()'].join('|'),
           'g',
         ),
         '',
@@ -128,15 +129,15 @@ const Discover = () => {
             className="file custom-file-input"
             id="file"
           />
-          <label for="file">
+          <label htmlFor="file">
             Select file
             <p className="file-name"></p>
           </label>
         </div>
         <br />
-        {musicFiles.length > 0 && <h2>Music Files:</h2>}
+        {musics?.length > 0 && <h2>Music Files:</h2>}
         <ul>
-          {musicFiles.map((file, index) => (
+          {musics?.map((file, index) => (
             <li
               className={`song-list ${
                 currentPlayName === fixName(file.name) ? 'onplay' : ''
@@ -147,22 +148,16 @@ const Discover = () => {
                 onClick={() => handleChoose(file)}
                 className="song-item-btn flex items-center"
               >
-                {currentPlayName === fixName(file.name) && (
+                {currentPlayName === fixName(file.name) ? (
                   <img src={onplay} alt="onplay" className="ml-2 mr-2" />
+                ) : (
+                  <div className="ml-4 mr-4" />
                 )}
-                <span
-                  className={`${
-                    currentPlayName === fixName(file.name) ? '' : 'ml-8'
-                  }`}
-                >
-                  {index + 1} -{' '}
-                </span>
-                {fixName(file.name)}
-
                 <img
                   src=""
                   alt=""
-                  className="object-scale-down h-12 w-24 rounded-md"
+                  className="object-scale-down w-12 h-12 rounded-md"
+                  onError={handleImageError}
                   ref={(img) => {
                     // Load the cover art for the current file
                     jsmediatags.read(file, {
@@ -181,13 +176,22 @@ const Discover = () => {
                     });
                   }}
                 />
+
+                <span
+                  className={`${
+                    currentPlayName === fixName(file.name) ? '' : 'ml-8'
+                  }`}
+                >
+                  {index + 1} -{' '}
+                </span>
+                {fixName(file.name)}
               </button>
             </li>
           ))}
         </ul>
-        {videoFiles.length > 0 && <h2>Video Files:</h2>}
+        {video?.length > 0 && <h2>Video Files:</h2>}
         <ul>
-          {videoFiles.map((file) => (
+          {video?.map((file) => (
             <li key={file.name}>{file.name}</li>
           ))}
         </ul>
@@ -199,8 +203,9 @@ const Discover = () => {
           <div className=" flex flex-row playing-song-details">
             {audioPicture && (
               <img
+                onError={handleImageError}
                 src={audioPicture}
-                className="ml-2 object-scale-down h-24 w-48 rounded-md"
+                className="ml-2 object-scale-down h-24 w-24 rounded-md"
                 alt="audio cover"
               />
             )}
@@ -214,8 +219,8 @@ const Discover = () => {
           </div>
         </div>
       )}
-      {musicFiles.length > 0 && <audio ref={audioRef} />}
-      {musicFiles.length > 0 && (
+      {musics?.length > 0 && <audio ref={audioRef} />}
+      {musics?.length > 0 && (
         <div>
           <button onClick={isPlaying ? handlePause : handlePlay}>
             {isPlaying ? 'Pause' : 'Play'}
