@@ -5,7 +5,7 @@ import Sidebar from '../partials/sidebar';
 import { useSelector, shallowEqual } from 'react-redux';
 
 export default function Root() {
-  const Data = useSelector(({ musicList }) => musicList, shallowEqual);
+  // const Data = useSelector(({ musicList }) => musicList, shallowEqual); //Sample
   return (
     <>
       <Sidebar />

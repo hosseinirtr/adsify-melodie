@@ -1,6 +1,6 @@
-export const setCurrentPlay = (list) => {
+export const setCurrentPlay = (file) => {
   return {
     type: 'SET',
-    payload: list,
+    payload: file,
   };
 };

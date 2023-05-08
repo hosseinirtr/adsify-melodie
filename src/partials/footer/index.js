@@ -1,11 +1,17 @@
 import './footer.css'
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { Howl, Howler } from 'howler';
 
 
 export const Footer = () => {
   const musicList = useSelector(state => state.musicList);
+  const current = useSelector(state => state.currentPlay);
+
+  const cur = useSelector((data) => data.currentPlay, shallowEqual);
+  console.log('cur-footer', cur);
+
+
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -14,10 +20,14 @@ export const Footer = () => {
   const [loop, setLoop] = useState(false);
   const [shuffle, setShuffle] = useState(false);
 
+
+  console.log('current', current.file)
+
+
   const currentTrack = musicList?.[currentTrackIndex];
 
   const sound = new Howl({
-    src: currentTrack?.url,
+    src: [cur?.file?.url],
     html5: true,
     onplay: () => setIsPlaying(true),
     onpause: () => setIsPlaying(false),
@@ -25,6 +35,9 @@ export const Footer = () => {
     onload: () => setDuration(sound.duration()),
     onseek: () => setCurrentTime(sound.seek()),
   });
+
+  console.log("sound", sound, '\n', [currentTrack?.url], '\n', currentTrack)
+
 
   useEffect(() => {
     if (musicList && musicList?.length > 0) {

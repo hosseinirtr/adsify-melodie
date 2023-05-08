@@ -12,6 +12,9 @@ const Discover = () => {
   const musics = useSelector((data) => data.musicList, shallowEqual);
   const video = useSelector((data) => data.videoList, shallowEqual);
 
+  const cur = useSelector((data) => data.currentPlay, shallowEqual);
+  console.log('cur', cur);
+
   const musicExtensions = useSelector(
     (musicExtensions) => musicExtensions.extensions.musicExtensions,
     shallowEqual,
@@ -35,6 +38,7 @@ const Discover = () => {
     audioRef?.current?.pause();
     setIsPlaying(false);
   };
+
   const handlePlay = () => {
     audioRef?.current?.play();
     setIsPlaying(true);
@@ -55,12 +59,18 @@ const Discover = () => {
         setAudioPicture(imageUrl);
         console.log(tag.tags);
         console.log(tag);
+
+        const Name = currentPlayName;
+        const artist = artistName;
+        const Picture = audioPicture;
+
         dispatch(
           setCurrentPlay({
             file,
-            currentPlayName,
-            artistName,
-            audioPicture,
+            src: URL.createObjectURL(file),
+            currentPlayName: Name,
+            artistName: artist,
+            audioPicture: Picture,
           }),
         );
       },
@@ -219,7 +229,7 @@ const Discover = () => {
           </div>
         </div>
       )}
-      {musics?.length > 0 && <audio ref={audioRef} />}
+      {musics?.length > 0 && isPlaying && <audio ref={audioRef} />}
       {musics?.length > 0 && (
         <div>
           <button onClick={isPlaying ? handlePause : handlePlay}>
