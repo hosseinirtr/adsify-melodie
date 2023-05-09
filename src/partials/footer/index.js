@@ -2,16 +2,13 @@ import './footer.css'
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { Howl, Howler } from 'howler';
+import { formatTime } from '../../utils/files';
 
 
 export const Footer = () => {
   const musicList = useSelector(state => state.musicList);
-  const current = useSelector(state => state.currentPlay);
 
   const cur = useSelector((data) => data.currentPlay, shallowEqual);
-  console.log('cur-footer', cur);
-
-
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -20,24 +17,33 @@ export const Footer = () => {
   const [loop, setLoop] = useState(false);
   const [shuffle, setShuffle] = useState(false);
 
-
-  console.log('current', current.file)
-
-
   const currentTrack = musicList?.[currentTrackIndex];
 
+  console.log(currentTrackIndex)
+
+
   const sound = new Howl({
-    src: [cur?.file?.url],
+    src: [cur?.src],
     html5: true,
-    onplay: () => setIsPlaying(true),
-    onpause: () => setIsPlaying(false),
-    onend: () => handleEnd(),
+    // onplay: () => setIsPlaying(true),
+    // onpause: () => setIsPlaying(false),
+    // onend: () => handleEnd(),
+    onend: function () {
+      console.log('Finished!');
+    },
     onload: () => setDuration(sound.duration()),
     onseek: () => setCurrentTime(sound.seek()),
   });
+  sound.once('load', function () {
+    sound.play();
+  });
 
-  console.log("sound", sound, '\n', [currentTrack?.url], '\n', currentTrack)
+  // Fires when the sound finishes playing.
+  sound.on('end', function () {
+    console.log('Finished!');
+  });
 
+  console.log(sound.duration())
 
   useEffect(() => {
     if (musicList && musicList?.length > 0) {
@@ -57,6 +63,7 @@ export const Footer = () => {
   }, [isPlaying]);
 
   const handleEnd = () => {
+    console.log("handel End")
     if (!loop) {
       if (currentTrackIndex === (musicList?.length ?? 0) - 1) {
         setIsPlaying(false);
@@ -70,47 +77,42 @@ export const Footer = () => {
   };
 
   const handlePlayPause = () => {
-    if (isPlaying) {
-      sound.pause();
-    } else {
-      sound.play();
-    }
+
+    sound.duration()
+    sound.play();
+    setIsPlaying(true);
+    return null
+    // }
   };
 
-  const handlePrev = () => {
-    if (currentTrackIndex === 0) {
-      setCurrentTrackIndex((musicList?.length ?? 0) - 1);
-    } else {
-      setCurrentTrackIndex(currentTrackIndex - 1);
-    }
-  };
 
-  const handleNext = () => {
-    if (currentTrackIndex === (musicList?.length ?? 0) - 1) {
-      setCurrentTrackIndex(0);
-    } else {
-      setCurrentTrackIndex(currentTrackIndex + 1);
-    }
-  };
+  const handlePause = () => {
+    // if (isPlaying) {
+    sound.pause();
+    setIsPlaying(false);
+    console.log('pause')
+    //   return null
+  }
 
-  const handleLoop = () => {
-    setLoop(!loop);
-  };
 
-  const handleShuffle = () => {
-    setShuffle(!shuffle);
-  };
+
+
+  console.log('The sound is', sound.playing(), ' and isPlaying is', isPlaying)
+  // console.log("112", sound.play())
+
 
   return (
     <div>
-      <button onClick={handlePlayPause}>{isPlaying ? 'Pause' : 'Play'}</button>
-      <button onClick={handlePrev}>Prev</button>
-      <button onClick={handleNext}>Next</button>
-      <button onClick={handleLoop}>{loop ? 'Disable Loop' : 'Enable Loop'}</button>
-      <button onClick={handleShuffle}>{shuffle ? 'Disable Shuffle' : 'Enable Shuffle'}</button>
+      <button onClick={isPlaying ? handlePause : handlePlayPause}>{isPlaying ? 'Pause' : 'Play'}</button>
+
+
       <div>{currentTrack?.name}</div>
-      <div>{currentTime}</div>
-      <div>{duration}</div>
-    </div>
+      <div>{ }
+        {formatTime(currentTime)}
+      </div>
+      <div>{ }
+        {formatTime(duration)}
+      </div>
+    </div >
   );
 };

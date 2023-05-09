@@ -12,9 +12,6 @@ const Discover = () => {
   const musics = useSelector((data) => data.musicList, shallowEqual);
   const video = useSelector((data) => data.videoList, shallowEqual);
 
-  const cur = useSelector((data) => data.currentPlay, shallowEqual);
-  console.log('cur', cur);
-
   const musicExtensions = useSelector(
     (musicExtensions) => musicExtensions.extensions.musicExtensions,
     shallowEqual,
@@ -180,9 +177,9 @@ const Discover = () => {
                           img.src = `data:${picture.format};base64,${base64String}`;
                         }
                       },
-                      onError: function (error) {
-                        console.log('Error reading tags:', error);
-                      },
+                      // onError: function (error) {
+                      //   console.log('Error reading tags:', error);
+                      // },
                     });
                   }}
                 />
@@ -209,32 +206,24 @@ const Discover = () => {
       <br />
       {isPlaying && (
         <div className="playing-song">
-          <audio src="" autoPlay={true} ref={audioRef} onEnded={handlePause} />
           <div className=" flex flex-row playing-song-details">
             {audioPicture && (
               <img
                 onError={handleImageError}
                 src={audioPicture}
-                className="ml-2 object-scale-down h-24 w-24 rounded-md"
+                className="ml-2 object-scale-down h-16 w-16 rounded-md"
                 alt="audio cover"
               />
             )}
-            <div className="song-artist">
-              {' '}
-              <br />
-              Artist name: {artistName}
-            </div>
-            <p>Now playing: {currentPlayName}</p>
-            {currentPlayName && <p>Now playing: {currentPlayName}</p>}
+            {currentPlayName && (
+              <div className="song-artist flex ">
+                Artist name: {artistName}
+                <br />
+                <p>Now playing: {currentPlayName}</p>
+                <br />
+              </div>
+            )}
           </div>
-        </div>
-      )}
-      {musics?.length > 0 && isPlaying && <audio ref={audioRef} />}
-      {musics?.length > 0 && (
-        <div>
-          <button onClick={isPlaying ? handlePause : handlePlay}>
-            {isPlaying ? 'Pause' : 'Play'}
-          </button>
         </div>
       )}
     </div>
