@@ -31,15 +31,6 @@ const Discover = () => {
     dispatch(setMusicList(event));
   };
 
-  const handlePause = () => {
-    audioRef?.current?.pause();
-    setIsPlaying(false);
-  };
-
-  const handlePlay = () => {
-    audioRef?.current?.play();
-    setIsPlaying(true);
-  };
   const handleChoose = (file) => {
     jsmediatags.read(file, {
       onSuccess: function (tag) {
@@ -75,9 +66,9 @@ const Discover = () => {
         console.log(':(', error.type, error.info);
       },
     });
-    handlePause();
+    // handlePause();
     audioRef.current.src = URL.createObjectURL(file);
-    handlePlay();
+    // handlePlay();
   };
 
   useEffect(() => {
