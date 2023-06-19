@@ -47,7 +47,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider errorElement={<ErrorPage />} router={router} />
     </>
   );
 }

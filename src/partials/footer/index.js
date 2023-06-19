@@ -1,8 +1,9 @@
 import './footer.css'
-import React, { useEffect, useRef, useState, } from 'react';
-import { useSelector, } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { shallowEqual, useSelector, } from 'react-redux';
 import { Howl, } from 'howler';
-import { formatTime } from '../../utils/files';
+import { formatTime, handleImageError } from '../../utils/files';
+import jsmediatags from 'jsmediatags-web';
 
 
 const sound = new Howl({
@@ -19,6 +20,9 @@ export const Footer = () => {
   const musicList = useSelector(state => state.musicList);
   const audioRef = useRef(null);
   const currentItem = useSelector((data) => data.currentPlay, shallowEqual);
+  const [currentPlayName, setCurrentPlayName] = useState();
+  const [artistName, setArtistName] = useState();
+  const [audioPicture, setAudioPicture] = useState();
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -69,33 +73,59 @@ export const Footer = () => {
     setCurrentTime(0);
   });
 
+
+  const [imageCover, setImageCover] = useState()
   useEffect(() => {
-    audioRef.current.src = URL.createObjectURL(currentItem);
+    if (!!currentItem) {
+      if (Object.keys(currentItem).length !== 0) {
+
+        jsmediatags.read(currentItem.file, {
+          onSuccess: function (tag) {
+            console.log("data")
+            const picture = tag.tags.picture;
+            const base64String = picture.data.reduce(
+              (acc, byte) => acc + String.fromCharCode(byte),
+              '',
+            );
+            const imageUrl = `data:${picture.format};base64,${window.btoa(
+              base64String,
+            )}`;
+            setImageCover(imageUrl)
+            const Name = tag.tags.title;
+            const artist = tag.tags.artist;
+
+            setCurrentPlayName(Name);
+            setArtistName(artist);
+            setAudioPicture(imageUrl);
+            console.log(tag.tags);
+            console.log(tag);
+          },
+          onError: function (error) {
+            console.log(':(', error.type, error.info);
+          },
+        });
+      }
+    }
+
   }, [currentItem])
 
+
+
+
   return (
-    <div>
-      <button onClick={() => sound.play()}>
-        Play +
-      </button>
-      <button onClick={() => sound.pause()}>
-        Pause -
-      </button>
-      <div>{currentTrack?.name}</div>
-      <div>{ }
-        {formatTime(currentTime)}
-      </div>
-      <div>{ }
-        {formatTime(duration)}
-      </div>
-
-
-
-
+    <div className='footer-player'>
+      {console.log("currentItem Img", currentItem)}
+      <img
+        src={imageCover}
+        alt=""
+        className="object-scale-down w-12 h-12 rounded-md bg-slate-200"
+        onError={handleImageError}
+      />
 
       <div>
         {isPlaying && (
           <div className="playing-song">
+            Olay
             <audio src="" autoPlay={true} ref={audioRef} onEnded={handlePause} />
             <div className=" flex flex-row playing-song-details">
               {audioPicture && (
@@ -117,6 +147,24 @@ export const Footer = () => {
           </div>
         )}
       </div>
+      <button onClick={() => sound.play()}>
+        Play +
+      </button>
+      <button onClick={() => sound.pause()}>
+        Pause -
+      </button>
+      <div>{currentTrack?.name}</div>
+      <div>{ }
+        {formatTime(currentTime)}
+      </div>
+      <div>{ }
+        {formatTime(duration)}
+      </div>
+
+
+
+
+
     </div >
   );
 };

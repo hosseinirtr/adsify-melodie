@@ -19,7 +19,7 @@ const Discover = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
-
+  const selectedRef = useRef(null);
   const [currentPlayName, setCurrentPlayName] = useState();
   const [dragOver, setDragOver] = useState(false);
   const [artistName, setArtistName] = useState();
@@ -32,43 +32,12 @@ const Discover = () => {
   };
 
   const handleChoose = (file) => {
-    jsmediatags.read(file, {
-      onSuccess: function (tag) {
-        const picture = tag.tags.picture;
-        const base64String = picture.data.reduce(
-          (acc, byte) => acc + String.fromCharCode(byte),
-          '',
-        );
-        const imageUrl = `data:${picture.format};base64,${window.btoa(
-          base64String,
-        )}`;
-        setCurrentPlayName(tag.tags.title);
-        setArtistName(tag.tags.artist);
-        setAudioPicture(imageUrl);
-        console.log(tag.tags);
-        console.log(tag);
-
-        const Name = currentPlayName;
-        const artist = artistName;
-        const Picture = audioPicture;
-
-        dispatch(
-          setCurrentPlay({
-            file,
-            src: URL.createObjectURL(file),
-            currentPlayName: Name,
-            artistName: artist,
-            audioPicture: Picture,
-          }),
-        );
-      },
-      onError: function (error) {
-        console.log(':(', error.type, error.info);
-      },
-    });
-    // handlePause();
-    audioRef.current.src = URL.createObjectURL(file);
-    // handlePlay();
+    console.log('checkItem', file);
+    dispatch(
+      setCurrentPlay({
+        file,
+      }),
+    );
   };
 
   useEffect(() => {
